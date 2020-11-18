@@ -92,10 +92,16 @@ console.log("Page loaded");
 
      // Configure the Firebase SDK.
      // This is the minimum configuration required for the API to be used.
-     var config = {
-       'apiKey': 'AIzaSyC-dtrh-A1In0ARZ5Q9t4LU9RIfFiFrcmg' // Copy this key from the web initialization
-                           // snippet found in the Firebase console.
-     };
+      var config = {
+        apiKey: "AIzaSyC-dtrh-A1In0ARZ5Q9t4LU9RIfFiFrcmg",
+        authDomain: "ambient-dev.firebaseapp.com",
+        databaseURL: "https://ambient-dev.firebaseio.com",
+        projectId: "ambient-dev",
+        storageBucket: "ambient-dev.appspot.com",
+        messagingSenderId: "269007777411",
+        appId: "1:269007777411:web:69a90db40021fd6f5bf5b6",
+        measurementId: "G-BBED96DKZ6"
+      };
      var app = firebase.initializeApp(config);
      var auth = app.auth();
 
