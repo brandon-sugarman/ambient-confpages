@@ -151,8 +151,11 @@ console.log("Page loaded");
      // parameter.
      var accountEmail;
      // Verify the password reset code is valid.
+
      auth.verifyPasswordResetCode(actionCode).then(function(email) {
+      
        var accountEmail = email;
+       console.log(email)
        // TODO: Show the reset screen with the user's email and ask the user for
        // the new password.
        $('.reset-box').addClass('.show');
