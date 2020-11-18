@@ -189,14 +189,18 @@ console.log("Page loaded");
 
 
    function getParameterByName(name, url = window.location.href) {
-     console.log("function2");
+     console.log("getting mode ...");
 
     name = name.replace(/[\[\]]/g, '\\$&');
     var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
         results = regex.exec(url);
     if (!results) return null;
     if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+
+    let mode = decodeURIComponent(results[2].replace(/\+/g, ' '));
+    console.log("mode: " + mode)
+  
+    return mode;
     }
     </script>
   </body>
