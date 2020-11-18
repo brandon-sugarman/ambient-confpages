@@ -16,13 +16,34 @@
       <div>
         <img class="login-logo" src="imgs/logoWithText.png">
       </div>
-      <div class="login-box">
+
+      </div>
+      <div id="reset-box" class = "login-box" style = "display: block;">
+         <form style = "display:block;">
+
+       <img style = " display: block;
+          margin-left: auto;
+          margin-right: auto;width: 100px; height: 100px;"src = "imgs/locked.gif">
+        <p style = "line-height: 23px;color: white; font-weight: 100;"> Please reset your password here. Use at least 8 characters. Don’t reuse a password from another site, or something too obvious.   </p>
+        <input id ="pwd" class = "input-field" type ="text" placeholder="Password"><br>
+        <input id = "confirmPwd" class = "input-field" type ="text" placeholder="Confirm Password"><br>
+        <button id = "password-reset-button">
+           <span></span>
+           <span></span>
+            <span></span>
+          <span></span>
+        SUBMIT</button>
+      </form>
+      </div>
+
+
+      <div id="verification-box"  class = "login-box" style ="display:none;">
         <form >
           <img style = " display: block;
     margin-left: auto;
     margin-right: auto;width: 230px; height: 170px;"src = "imgs/checkmark.gif">
         <p style = "line-height: 23px;color: white; font-weight: 100;"> Congratulations! Your email has been verified. Press the button below to return to the website. </p>
-        <a href = "https://ambient.chat" value = "Login">
+        <a href = "https://ambient.chat"value = "Login">
            <span></span>
            <span></span>
             <span></span>
@@ -32,20 +53,7 @@
       </div>
 
 
-      <div class="reset-box" style = "display: none;">
-        <form >
-
-        <p style = "line-height: 23px;color: white; font-weight: 100;"> Reset password here  </p>
-        <input id ="pwd" type ="text" placeholder="Password">
-        <input id = "confirmPwd" type ="text" placeholder="Confirm Password">
-
-           <span></span>
-           <span></span>
-            <span></span>
-          <span></span>
-        Return</a>
-      </form>
-      </div>
+      
 
     </div>
 
@@ -72,7 +80,7 @@
    <script>
    document.addEventListener('DOMContentLoaded', function() {
      // TODO: Implement getParameterByName()
-console.log("function1");
+console.log("Page loaded");
      // Get the action to complete.
      var mode = getParameterByName('mode');
      // Get the one-time code from the query parameter.
@@ -118,8 +126,8 @@ console.log("function1");
      auth.applyActionCode(actionCode).then(function(resp) {
        // Email address has been verified.
 
-       $('.loginPage').addClass('.show');
-
+       $('.reset-box').addClass('.hide');
+       $('.verification-box').addClass('.show');
        // You could also provide the user with a link back to the app.
        // TODO: If a continue URL is available, display a button which on
        // click redirects the user back to the app via continueUrl with
@@ -131,27 +139,36 @@ console.log("function1");
    }
 
    function handleResetPassword(auth, actionCode, continueUrl, lang) {
-     console.log("function3");
+     console.log("reset password function triggered");
 
-     console.log("test");
      // Localize the UI to the selected language as determined by the lang
      // parameter.
      var accountEmail;
      // Verify the password reset code is valid.
      auth.verifyPasswordResetCode(actionCode).then(function(email) {
        var accountEmail = email;
-       console.log("last function");
        // TODO: Show the reset screen with the user's email and ask the user for
        // the new password.
        $('.reset-box').addClass('.show');
-       $('.login-box').addClass('.hide');
+       $('.verification-box').addClass('.hide');
 
 
+       $("#password-reset-button").on("click",function()
+          {
+               let newPassword = document.getElementByID("pwd").value;
+               let newPasswordConfirm = document.getElementByID("confirmPwd").value;
 
+          }
+
+
+     
+      if (newPassword == newPasswordConfirm){
+        print("passwords match!!")
+      }
        // Save the new password.
        auth.confirmPasswordReset(actionCode, newPassword).then(function(resp) {
          // Password reset has been confirmed and new password updated.
-
+        console.log("successfully reset password")
          // TODO: Display a link back to the app, or sign-in the user directly
          // if the page belongs to the same domain as the app:
          // auth.signInWithEmailAndPassword(accountEmail, newPassword);
